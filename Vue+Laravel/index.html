@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Book</title>
+</head>
+<body>
+    <div id="app">
+        <h1 style="text-align: center;">Create Book</h1>
+        <form class="card" style="width: 50%; text-align: center; margin-left: auto;margin-right: auto;margin-top: 30px;">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Title</label>
+              <input type="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Body</label>
+              <input type="text" class="form-control" id="exampleInputPassword1" placeholder="body">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Author_id</label>
+              <input type="number" class="form-control" id="exampleInputPassword1" placeholder="author_id">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+          <div class="card" style="width: 50%; text-align: center; margin-left: auto;margin-right: auto;margin-top: 30px;">
+            <div class="card-body" v-for="book in books"> 
+              <h5 class="card-title">Title:{{book.title}}</h5>
+              <p class="card-text">Body:{{book.body}}</p>
+              <button @click="create" type="button" class="btn btn-danger">Remove</button>
+            </div>
+          </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src = "js/app.js"></script>
+</html>
