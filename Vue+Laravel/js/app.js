@@ -2,9 +2,9 @@ new Vue({
     el:"#app",
     data:{
         books:[],
-        
         title:"",
         body:"",
+        edit:[],
         author_id:0,
     },
     methods: {
@@ -18,19 +18,34 @@ new Vue({
         create() {
             let url = "http://localhost:8000/api/book"
             let data={
-               author_id:this.author_id,
-               body:this.body,
-                title:this.title,
-
+                "author_id":this.author_id,
+                "body":this.body,
+                "title":this.title,
             }
             axios.post(url,data).then(response => {
                 this.books = response.data.data;
                 console.log("Created Book")
             })
+            this.author_id = 0;
+            this.body = "";
+            this.tite = "";
         },
+        edit(id){
+            let newBook = {
+                "body":this.body,
+                "title":this.title
+            }
+            axios.put(url+"/"+id,newBook)
+            .then((res) => {
+                this.edit = (res.data)
+                this.body = "";
+                this.tite = "";
+            })
+        },
+
         deleteUser(id)
         {
-            this.axios.delete("http://localhost:8000/api/book" +id).then(()=>{
+            axios.delete(url+"/"+id).then(()=>{
                this.getTodo();
                console.log("delete"+id);
             })
@@ -39,6 +54,4 @@ new Vue({
     mounted() {
         this.getTodo();
     },
-    
-
 })

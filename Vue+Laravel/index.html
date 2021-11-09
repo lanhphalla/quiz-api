@@ -4,34 +4,77 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Book</title>
 </head>
 <body>
     <div id="app">
         <h1 style="text-align: center;">Create Book</h1>
         <form class="card" style="width: 50%; text-align: center; margin-left: auto;margin-right: auto;margin-top: 30px;">
-            <div class="form-group">
+            <div class="form-group" style="width: 50%; margin-left: auto; margin-right: auto;">
               <label for="exampleInputEmail1">Title</label>
-              <input type="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title">
-            </div>
-            <div class="form-group">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title">
               <label for="exampleInputPassword1">Body</label>
               <input type="text" class="form-control" id="exampleInputPassword1" placeholder="body">
-            </div>
-            <div class="form-group">
               <label for="exampleInputPassword1">Author_id</label>
               <input type="number" class="form-control" id="exampleInputPassword1" placeholder="author_id">
             </div>
-            
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button @click="create"  type="submit" class="btn btn-primary" style="justify-content: center; width: 20%; margin-left: 40%;">Submit</button>
           </form>
 
-          <div class="card" style="width: 50%; text-align: center; margin-left: auto;margin-right: auto;margin-top: 30px;">
+          <div class="card" style="width: 50%; margin-left: auto;margin-right: auto;margin-top: 30px;">
+
             <div class="card-body" v-for="book in books"> 
-              <h5 class="card-title">Title:{{book.title}}</h5>
-              <p class="card-text">Body:{{book.body}}</p>
-              <button @click="create" type="button" class="btn btn-danger">Remove</button>
+              <div class="title" style="text-align: center;">
+                <h5 class="card-title">Title:{{book.title}}</h5>
+              </div>
+              <div class="body" style="display: flex; justify-content: space-between;">
+                <div class="text">
+                  <p class="card-text">Body:{{book.body}}</p>
+                  
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                    Update
+                  </button>
+    
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Edit book</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        
+                        <div class="form-group" style="width: 50%; margin-left: auto; margin-right: auto;">
+                          <label for="exampleInputEmail1">{{book.title}}</label>
+                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="title">
+                          <label for="exampleInputPassword1">{{book.body}}</label>
+                          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="body">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal" @click="edit(book.id)">Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                </div>
+                <div class="delete">
+                  <button @click="delete(book.id)" type="button" class="btn btn-danger">X</button>
+                  <button type="button" class="btn btn-primary">I</button>
+                </div>
+              </div>
+              
             </div>
           </div>
     </div>
